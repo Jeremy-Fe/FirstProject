@@ -1,7 +1,10 @@
 package Spare.Form.SpareMain_01;
 
+import java.util.Date;
+
 public class SpareMember {
-	private String mid, mpw, mname, mclub, gid, gdate, gscore;
+	private String mid, mpw, mname, mclub, sid, gid, gscore;
+	private Date gdate;
 
 	SpareMember(String mid, String mpw, String mname, String mclub) {
 		this.mid = mid;
@@ -9,7 +12,12 @@ public class SpareMember {
 		this.mname = mname;
 		this.mclub = mclub;
 	}
-	
+	SpareMember(String sid, String gid, Date gdate, String gscore) {
+		this.sid = sid;
+		this.gid = gid;
+		this.gdate = gdate;
+		this.gscore = gscore;
+	}
 	
 	public String getMid() {
 		return mid;
@@ -42,7 +50,13 @@ public class SpareMember {
 	public void setMclub(String mclub) {
 		this.mclub = mclub;
 	}
+	public String getSid() {
+		return sid;
+	}
 
+	public void setSid(String gid) {
+		this.gid = sid;
+	}
 	public String getGid() {
 		return gid;
 	}
@@ -51,11 +65,11 @@ public class SpareMember {
 		this.gid = gid;
 	}
 
-	public String getGdate() {
+	public Date getGdate() {
 		return gdate;
 	}
 
-	public void setGdate(String gdate) {
+	public void setGdate(Date gdate) {
 		this.gdate = gdate;
 	}
 

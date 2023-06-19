@@ -9,13 +9,17 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import Spare.Form.SpareMain_01.SpareMain_01_01;
+import Spare.Form.SpareMain_01.SpareMain_01_02;
+import Spare.Form.SpareMain_01.SpareMain_01_02_DateDAO;
+import Spare.Form.SpareMain_01.SpareMain_01_03;
+import Spare.Form.SpareMain_01.SpareMain_01_SelectDate;
 
 public class SpareMain extends WindowAdapter {
 	private Frame Spare;
 	private Button myHistory, scoreRecord, rank, myDetail, dayCheck, monthCheck;
 	
 	SpareMain(String id) {
-		Spare = new Frame("메인 프레임"); // 로그인 성공시 생성되는 메인 프레임
+		Spare = new Frame("Spare Main"); // 로그인 성공시 생성되는 메인 프레임
 		Spare.setBounds(500, 300, 1000, 600);
 		Spare.setVisible(true);
 		Spare.addWindowListener(this);
@@ -38,10 +42,21 @@ public class SpareMain extends WindowAdapter {
 				dayCheck = new Button("일별 조회");
 				dayCheck.setBounds(600, 250, 250, 100);
 				dayCheck.setFont(new Font("고딕", Font.BOLD, 25));
+				dayCheck.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						new SpareMain_01_02(id);
+						
+					}
+				});
 				
 				monthCheck = new Button("월별 조회");
 				monthCheck.setBounds(600, 375, 250, 100);
 				monthCheck.setFont(new Font("고딕", Font.BOLD, 25));
+				monthCheck.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+					}
+				});
 				
 				Spare.add(myDetail);
 				Spare.add(dayCheck);
@@ -68,7 +83,5 @@ public class SpareMain extends WindowAdapter {
 		Spare.dispose();
 	}
 	
-	public static void main(String[] args) {
-		new SpareMain("안녕");
-	}
+	
 }

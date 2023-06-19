@@ -67,6 +67,7 @@ public class SpareJoinForm extends WindowAdapter{
 		
 		Label lClub = new Label("상주볼링장 : ");
 		lClub.setBounds(60, 300, 100, 40);
+		
 		tfBowlingClub = new Choice();
 		tfBowlingClub.addItem("위너스볼링장");
 		tfBowlingClub.addItem("크로바볼링장");

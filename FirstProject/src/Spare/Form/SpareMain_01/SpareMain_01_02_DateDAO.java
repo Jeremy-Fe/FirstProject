@@ -5,49 +5,52 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class SpareMemberDAO {
+public class SpareMain_01_02_DateDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:himedia";
 	String user = "c##himedia";
 	String password = "himedia";
-	
 	private Connection con;
 	private Statement stmt;
 	private ResultSet rs; 
 	
-	public ArrayList<SpareMember> list(String id) {
+	
+	public ArrayList<SpareMember> list(String id, String date) {
 		ArrayList<SpareMember> list = new ArrayList<SpareMember>();
 		
 		try {
 			connDB();
 			
-			String query = "SELECT * FROM SPAREMEMBER";
-			if(id != null) {
-				query += " where id=TRIM('" + id + "')";
+			String query = "SELECT * FROM(select S_ID, ID, G_SCORE, to_char(G_DATE, 'yyyy-mm-dd') as G_DATE from SCORE) ";
+			if(date != null) {
+				query += "WHERE G_DATE like '" + date + "' AND id = '" + id + "'";
 			}
 			System.out.println("SQL : " + query);
 			
 			rs = stmt.executeQuery(query);
-			rs.last();
+			rs.first(); // 커서를 맨 처음으로
 			System.out.println("rs.getRow() : " + rs.getRow());
 			
 			if(rs.getRow() == 0) {
 				System.out.println("0 row selected.....");
 			} else {
 				System.out.println(rs.getRow() + " rows selected.....");
-				rs.previous();
-				while(rs.next()) {
-					String getId = rs.getString("ID");
-					String getPw = rs.getString("PW");
-					String getName = rs.getString("NAME");
-					String getClub = rs.getString("CLUB");
-					
-					SpareMember data = new SpareMember(getId, getPw, getName, getClub);
+				rs.previous(); // 커서를 이전으로
+				while(rs.next()) { // 커서를 다음으로
+					String getSid = rs.getString("S_ID");
+					String getGid = rs.getString("ID");
+					Date getGdate = rs.getDate("G_DATE");
+					String getGscore = rs.getString("G_SCORE");
+						
+					SpareMember data = new SpareMember(getSid, getGid, getGdate, getGscore);
+						
 					list.add(data);
 				}
+				
 			}
-		} catch( Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return list;
@@ -73,4 +76,5 @@ public class SpareMemberDAO {
 	public ResultSet getRs() {
 		return rs;
 	}
+
 }

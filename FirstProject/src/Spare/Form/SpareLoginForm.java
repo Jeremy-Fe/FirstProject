@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import Spare.SpareDAO;
 import Spare.SpareVo;
 
-public class SpareLoginForm extends WindowAdapter{
+public class SpareLoginForm extends WindowAdapter {
 	private Frame f;
 	private TextField tfId, tfPwd, tfMsg;
 	private Button bLogin, bJoin;
@@ -62,7 +62,8 @@ public class SpareLoginForm extends WindowAdapter{
 						System.out.println("로그인이 되었습니다!");
 						tfMsg.setText("로그인이 되었습니다.!");
 						
-						new SpareMain();
+						System.out.println(id);
+						new SpareMain(id);
 						f.dispose();
 					} else {
 						System.out.println("다시 입력하세요.");

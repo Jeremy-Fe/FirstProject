@@ -40,7 +40,6 @@ public class SpareJoinForm extends WindowAdapter{
 		
 		Label lpwdCheck1 = new Label("*비밀번호는 영문,");
 		Label lpwdCheck2 = new Label(" 숫자, 특수문자로 구성");
-//		Label lpwdCheck2 = new Label("*비밀번호는 영문, 숫자, 특수문자로 구성됩니다.");
 		lpwdCheck1.setBounds(360, 130, 100, 20);
 		lpwdCheck2.setBounds(360, 140, 120, 40);
 		
@@ -150,10 +149,24 @@ public class SpareJoinForm extends WindowAdapter{
 	public void windowClosing(WindowEvent e) {
 		join.dispose();
 	}
+	public void DialogError() {
+		Dialog dl = new Dialog(join, "입력 오류", true); // 다이얼로그 오류창
+		dl.setBounds(560, 400, 300, 100);
+		dl.setLayout(new FlowLayout());
+		Label msg = new Label("     입력이 잘못 되었습니다. 다시 입력하세요.", Label.CENTER);
+		Button ok = new Button("확인");
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dl.dispose();
+			}
+		});
+		dl.add(msg);
+		dl.add(ok);
+		dl.setVisible(true);
+	}
 	public void DialogPwReError() {
 		Dialog dl = new Dialog(join, "비밀번호 오류", true); // 다이얼로그 오류창
-		dl.setSize(300, 100);
-		dl.setLocation(300, 50);
+		dl.setBounds(560, 400, 300, 100);
 		dl.setLayout(new FlowLayout());
 		Label msg = new Label("비밀번호가 서로 맞지 않습니다. 다시 입력하세요.", Label.CENTER);
 		Button ok = new Button("확인");
@@ -167,9 +180,8 @@ public class SpareJoinForm extends WindowAdapter{
 		dl.setVisible(true);
 	}
 	public void DialogIdError() {
-		Dialog dl = new Dialog(join, "아이디 오류", true); // 다이얼로그 오류창
-		dl.setSize(300, 100);
-		dl.setLocation(300, 50);
+		Dialog dl = new Dialog(join, "아이디 중복", true); // 다이얼로그 오류창
+		dl.setBounds(560, 400, 300, 100);
 		dl.setLayout(new FlowLayout());
 		Label msg = new Label("아이디가 중복됩니다. 다시 입력하세요.", Label.CENTER);
 		Button ok = new Button("확인");
@@ -182,28 +194,12 @@ public class SpareJoinForm extends WindowAdapter{
 		dl.add(ok);
 		dl.setVisible(true);
 	}
-	public void DialogError() {
-		Dialog dl = new Dialog(join, "입력 오류", true); // 다이얼로그 오류창
-		dl.setSize(300, 100);
-		dl.setLocation(300, 50);
-		dl.setLayout(new FlowLayout());
-		Label msg = new Label("입력이 잘못 되었습니다. 다시 입력하세요.", Label.CENTER);
-		Button ok = new Button("확인");
-		ok.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dl.dispose();
-			}
-		});
-		dl.add(msg);
-		dl.add(ok);
-		dl.setVisible(true);
-	}
+	
 	public void DialogId() {
 		Dialog dl = new Dialog(join, "회원가입 완료!", true); // 다이얼로그 오류창
-		dl.setSize(300, 100);
-		dl.setLocation(300, 50);
+		dl.setBounds(560, 400, 300, 100);
 		dl.setLayout(new FlowLayout());
-		Label msg = new Label("회원가입이 완료되었습니다.", Label.CENTER);
+		Label msg = new Label("               회원가입이 완료되었습니다.               ", Label.CENTER);
 		Button ok = new Button("확인");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -218,8 +214,7 @@ public class SpareJoinForm extends WindowAdapter{
 	
 	public void DialogKorean() {
 		Dialog dl = new Dialog(join, "비밀번호 입력 오류", true); // 다이얼로그 오류창
-		dl.setSize(400, 100);
-		dl.setLocation(300, 50);
+		dl.setBounds(560, 400, 400, 100);
 		dl.setLayout(new FlowLayout());
 		Label msg = new Label("비밀번호에 한글 또는 공백이 포함되어 있습니다. 다시 입력하세요.", Label.CENTER);
 		Button ok = new Button("확인");

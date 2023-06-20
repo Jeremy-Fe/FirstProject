@@ -6,13 +6,13 @@ public class SpareMember {
 	private String mid, mpw, mname, mclub, sid, gid, gscore;
 	private Date gdate;
 
-	SpareMember(String mid, String mpw, String mname, String mclub) {
+	public SpareMember(String mid, String mpw, String mname, String mclub) {
 		this.mid = mid;
 		this.mpw = mpw;
 		this.mname = mname;
 		this.mclub = mclub;
 	}
-	SpareMember(String sid, String gid, Date gdate, String gscore) {
+	public SpareMember(String sid, String gid, Date gdate, String gscore) {
 		this.sid = sid;
 		this.gid = gid;
 		this.gdate = gdate;

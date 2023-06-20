@@ -107,7 +107,4 @@ public class SpareMain_01_01 extends JFrame {
 	}
 	
 	
-	public void windowClosing(WindowEvent e) {
-		
-	}
 }

@@ -1,4 +1,4 @@
-package Spare.Form.SpareMain_01;
+package Spare.Form.SpareMain_02;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,25 +7,28 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SpareMain_01_02_DateDAO {
+import Spare.SpareVo;
+import Spare.Form.SpareMain_01.SpareMember;
+
+public class SpareScoreDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:himedia";
 	String user = "c##himedia";
 	String password = "himedia";
+	
 	private Connection con;
 	private Statement stmt;
 	private ResultSet rs; 
 	
-	
-	public ArrayList<SpareMember> list(String id, String date) {
+	public ArrayList<SpareMember> list(String id) {
 		ArrayList<SpareMember> list = new ArrayList<SpareMember>();
 		
 		try {
 			connDB();
 			
-			String query = "SELECT * FROM(select S_ID, ID, G_SCORE, to_char(G_DATE, 'yyyy-mm-dd') as G_DATE from SCORE) ";
-			if(date != null) {
-				query += "WHERE G_DATE like '" + date + "%' AND id = '" + id + "'";
+			String query = "SELECT * FROM SCORE";
+			if(id != null) {
+				query += " where id=TRIM('" + id + "') ORDER BY S_ID";
 			}
 			System.out.println("SQL : " + query);
 			
@@ -76,5 +79,4 @@ public class SpareMain_01_02_DateDAO {
 	public ResultSet getRs() {
 		return rs;
 	}
-
 }

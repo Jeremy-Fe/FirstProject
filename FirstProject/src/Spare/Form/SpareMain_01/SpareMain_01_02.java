@@ -7,6 +7,8 @@ import java.awt.Frame;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -46,6 +48,7 @@ public class SpareMain_01_02 extends JFrame {
 		instruction.setBounds(115, 150, 400, 40);
 
 		y = new Choice(); // 년도
+		y.add("년도");
 		y.addItem("2023");
 		y.addItem("2022");
 		y.addItem("2021");
@@ -53,6 +56,7 @@ public class SpareMain_01_02 extends JFrame {
 		y.setBounds(80, 200, 200, 50);
 
 		m = new Choice(); // 월
+		m.add("월");
 		for (int i = 1; i <= 12; i++) {
 			if (i < 10) {
 				m.addItem("0" + String.valueOf(i));
@@ -64,14 +68,15 @@ public class SpareMain_01_02 extends JFrame {
 		m.setBounds(80, 240, 200, 50);
 
 		d = new Choice(); // 일
-		for (int i = 1; i <= 31; i++) {
-			if (i < 10) {
-				d.addItem("0" + String.valueOf(i));
-			} else {
-				d.addItem(String.valueOf(i));
+		d.add("일");
+		m.addItemListener(new ItemListener() { // 월 선택 시 해당 월 일수 변경하는 메소드
+			public void itemStateChanged(ItemEvent e) {
+				d.removeAll();
+				inputDay(monthCheck(m.getSelectedIndex()));
+				d.select(0);
+				
 			}
-		}
-		d.setSize(190, 60);
+		});
 		d.setBounds(80, 280, 200, 50);
 
 		search = new Button("검색");
@@ -171,5 +176,34 @@ public class SpareMain_01_02 extends JFrame {
 
 		});
 	}
-
+	
+	
+	public int monthCheck(int s) {
+		switch(s) {
+			case 1: return 31;
+			case 2: return 28;
+			case 3: return 31;
+			case 4: return 30;
+			case 5: return 31;
+			case 6: return 30;
+			case 7: return 31;
+			case 8: return 31;
+			case 9: return 30;
+			case 10: return 31;
+			case 11: return 30;
+			case 12: return 31;
+			default : return 31;
+		}
+		
+	}
+	public void inputDay(int n) {
+		d.add("일");
+		for (int i = 1; i <= n; i++) {
+			if (i < 10) {
+				d.addItem("0" + String.valueOf(i));
+			} else {
+				d.addItem(String.valueOf(i));
+			}
+		}
+	}
 }

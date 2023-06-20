@@ -10,9 +10,7 @@ import java.awt.event.WindowEvent;
 
 import Spare.Form.SpareMain_01.SpareMain_01_01;
 import Spare.Form.SpareMain_01.SpareMain_01_02;
-import Spare.Form.SpareMain_01.SpareMain_01_02_DateDAO;
 import Spare.Form.SpareMain_01.SpareMain_01_03;
-import Spare.Form.SpareMain_01.SpareMain_01_SelectDate;
 
 public class SpareMain extends WindowAdapter {
 	private Frame Spare;
@@ -54,7 +52,7 @@ public class SpareMain extends WindowAdapter {
 				monthCheck.setFont(new Font("고딕", Font.BOLD, 25));
 				monthCheck.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+						new SpareMain_01_03(id);
 					}
 				});
 				

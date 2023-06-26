@@ -5,77 +5,108 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
-
-import Spare.SpareVo;
-import Spare.Form.SpareMain_01.SpareMember;
 
 public class SpareScoreDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:himedia";
 	String user = "c##himedia";
 	String password = "himedia";
-	
+
 	private Connection con;
 	private Statement stmt;
-	private ResultSet rs; 
-	
-	public ArrayList<SpareMember> list(String id) {
-		ArrayList<SpareMember> list = new ArrayList<SpareMember>();
-		
+	private ResultSet rs;
+	private boolean dup;
+	private int cnt;
+
+
+	public boolean duplication(String date, String id) { 
 		try {
 			connDB();
-			
-			String query = "SELECT * FROM SCORE";
-			if(id != null) {
-				query += " where id=TRIM('" + id + "') ORDER BY S_ID";
+
+			String query = "SELECT * FROM(select ID, to_char(G_DATE, 'yyyy-mm-dd') as G_DATE from SCORE) ";
+			if (date != null) {
+				query += "WHERE G_DATE like '" + date + "' AND id = '" + id + "'";
 			}
 			System.out.println("SQL : " + query);
 			
 			rs = stmt.executeQuery(query);
-			rs.first(); // 커서를 맨 처음으로
-			System.out.println("rs.getRow() : " + rs.getRow());
+			rs.last(); 
 			
-			if(rs.getRow() == 0) {
-				System.out.println("0 row selected.....");
+			
+			System.out.println("rs.getRow() : " + rs.getRow());
+
+			if (!(rs.getRow() == 0)) {
+				dup = true;
 			} else {
-				System.out.println(rs.getRow() + " rows selected.....");
-				rs.previous(); // 커서를 이전으로
-				while(rs.next()) { // 커서를 다음으로
-					String getSid = rs.getString("S_ID");
-					String getGid = rs.getString("ID");
-					Date getGdate = rs.getDate("G_DATE");
-					String getGscore = rs.getString("G_SCORE");
-						
-					SpareMember data = new SpareMember(getSid, getGid, getGdate, getGscore);
-						
-					list.add(data);
-				}
-				
+				dup = false;
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
+			System.out.println(e.getMessage()); 
 			e.printStackTrace();
 		}
-		return list;
+		return dup;
 	}
-	
+
+	public void deleteData(String date, String id) {
+		try {
+			connDB();
+
+			String query = "DELETE FROM (select ID, to_char(G_DATE, 'yyyy-mm-dd') as G_DATE from SCORE)";
+			if (date != null) {
+				query += "WHERE G_DATE like '" + date + "%' AND ID = '" + id + "'";
+			}
+			System.out.println("SQL : " + query);
+
+			int res = stmt.executeUpdate(query);
+			if (res == 0) {
+				System.out.println("삭제 실패");
+			} else {
+				System.out.println("삭제 성공");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public int duplication_S_ID() {
+		try {
+			connDB();
+
+			String query = "SELECT S_ID FROM SCORE ORDER BY S_ID DESC";
+			System.out.println("SQL : " + query);
+			
+			rs = stmt.executeQuery(query);
+			rs.next();
+			System.out.println("rs.getInt(1) : " + rs.getInt(1));
+
+			cnt = rs.getInt(1);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage()); 
+			e.printStackTrace();
+		}
+		return cnt;
+	}
 	public void connDB() {
 		try {
-		Class.forName(driver);
-		con = DriverManager.getConnection(url, user, password);
-		stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-		System.out.println("statement create success.");
-		} catch (Exception e){
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, user, password);
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			System.out.println("statement create success.");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Connection getCon() {
 		return con;
 	}
+
 	public Statement getStmt() {
 		return stmt;
 	}
+
 	public ResultSet getRs() {
 		return rs;
 	}

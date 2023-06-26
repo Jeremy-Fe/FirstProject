@@ -3,7 +3,8 @@ package Spare.Form.SpareMain_01;
 import java.util.Date;
 
 public class SpareMember {
-	private String mid, mpw, mname, mclub, sid, gid, gscore;
+	private String mid, mpw, mname, mclub, sid, gid, gscore, rankName, rankCount, rankSum, rankMax, rankAvg;
+
 	private Date gdate;
 
 	public SpareMember(String mid, String mpw, String mname, String mclub) {
@@ -12,6 +13,7 @@ public class SpareMember {
 		this.mname = mname;
 		this.mclub = mclub;
 	}
+
 	public SpareMember(String sid, String gid, Date gdate, String gscore) {
 		this.sid = sid;
 		this.gid = gid;
@@ -19,6 +21,34 @@ public class SpareMember {
 		this.gscore = gscore;
 	}
 	
+	public SpareMember(String rankName,String rankCount,String rankSum,String rankMax,String rankAvg) {
+		this.rankName = rankName;
+		this.rankCount = rankCount;
+		this.rankSum = rankSum;
+		this.rankMax = rankMax;
+		this.rankAvg = rankAvg;
+	}
+
+	public String getRankName() {
+		return rankName;
+	}
+
+	public String getRankCount() {
+		return rankCount;
+	}
+
+	public String getRankSum() {
+		return rankSum;
+	}
+
+	public String getRankMax() {
+		return rankMax;
+	}
+
+	public String getRankAvg() {
+		return rankAvg;
+	}
+
 	public String getMid() {
 		return mid;
 	}
@@ -50,6 +80,7 @@ public class SpareMember {
 	public void setMclub(String mclub) {
 		this.mclub = mclub;
 	}
+
 	public String getSid() {
 		return sid;
 	}
@@ -57,6 +88,7 @@ public class SpareMember {
 	public void setSid(String gid) {
 		this.gid = sid;
 	}
+
 	public String getGid() {
 		return gid;
 	}
@@ -80,5 +112,5 @@ public class SpareMember {
 	public void setGscore(String gscore) {
 		this.gscore = gscore;
 	}
-	
+
 }

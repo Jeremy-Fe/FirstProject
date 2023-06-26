@@ -2,6 +2,8 @@ package Spare.Form.SpareMain_01;
 
 import java.awt.Button;
 import java.awt.Choice;
+import java.awt.Dialog;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Label;
@@ -46,6 +48,7 @@ public class SpareMain_01_03 extends JFrame {
 		instruction.setBounds(115, 150, 400, 40);
 
 		y = new Choice(); // 년도
+		y.add("년도");
 		y.addItem("2023");
 		y.addItem("2022");
 		y.addItem("2021");
@@ -53,6 +56,7 @@ public class SpareMain_01_03 extends JFrame {
 		y.setBounds(80, 200, 200, 50);
 
 		m = new Choice(); // 월
+		m.add("월");
 		for (int i = 1; i <= 12; i++) {
 			if (i < 10) {
 				m.addItem("0" + String.valueOf(i));
@@ -62,7 +66,6 @@ public class SpareMain_01_03 extends JFrame {
 		}
 		m.setSize(190, 60);
 		m.setBounds(80, 240, 200, 50);
-
 
 		search = new Button("검색");
 		search.setBounds(300, 200, 100, 100);
@@ -76,79 +79,113 @@ public class SpareMain_01_03 extends JFrame {
 
 		search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				new SpareMain_01_03(id);
 				date = y.getSelectedItem() + "-" + m.getSelectedItem();
+				if (!(selectType(date))) {
+					dialogSelectDateError();
+				} else {
+					frame.dispose();
+					new SpareMain_01_03(id);
 
-				select = new SpareMain_01_02_DateDAO();
-				ArrayList<SpareMember> selectDay = select.list(id, date);
+					select = new SpareMain_01_02_DateDAO();
+					ArrayList<SpareMember> selectDay = select.list(id, date);
 
-				String[] Gid = new String[selectDay.size()];
-				String[] Gdate = new String[selectDay.size()];
-				String[] Gscore = new String[selectDay.size()];
+					String[] Gid = new String[selectDay.size()];
+					String[] Gdate = new String[selectDay.size()];
+					String[] Gscore = new String[selectDay.size()];
 
-				for (int i = 0; i < selectDay.size(); i++) { // 게임 수 배열안에다 데이터 집어 넣기
-					SpareMember getDataScore = (SpareMember) selectDay.get(i);
-					Gid[i] = getDataScore.getGid();
-					Gdate[i] = getDataScore.getGdate().toString();
-					Gscore[i] = getDataScore.getGscore();
-				}
-
-				int sum = 0, cnt = 0;
-				double avg;
-
-				for (int i = 0; i < Gscore.length; i++) {
-					sum += Integer.parseInt(Gscore[i]);
-					cnt++;
-				}
-				avg = (double) sum / cnt;
-
-				int max = 0;
-				for (int i = 0; i < Gscore.length; i++) { // 최고점수 계산
-					if (max < Integer.parseInt(Gscore[i])) {
-						max = Integer.parseInt(Gscore[i]);
+					for (int i = 0; i < selectDay.size(); i++) { // 게임 수 배열안에다 데이터 집어 넣기
+						SpareMember getDataScore = (SpareMember) selectDay.get(i);
+						Gid[i] = getDataScore.getGid();
+						Gdate[i] = getDataScore.getGdate().toString();
+						Gscore[i] = getDataScore.getGscore();
 					}
+
+					int sum = 0, cnt = 0;
+					double avg;
+
+					for (int i = 0; i < Gscore.length; i++) {
+						sum += Integer.parseInt(Gscore[i]);
+						cnt++;
+					}
+					if (sum == 0 || cnt == 0) {
+						avg = 0;
+					} else {
+						avg = (double) sum / cnt;
+					}
+
+					int max = 0;
+					for (int i = 0; i < Gscore.length; i++) { // 최고점수 계산
+						if (max < Integer.parseInt(Gscore[i])) {
+							max = Integer.parseInt(Gscore[i]);
+						}
+					}
+
+					data = new String[5][2];
+					data[0][0] = "날짜";
+					data[0][1] = date + "월 종합";
+
+					data[1][0] = "게임 수";
+					data[1][1] = selectDay.size() + "G";
+
+					data[2][0] = "총점";
+					data[2][1] = "총 " + sum + "점";
+
+					data[3][0] = "최고";
+					data[3][1] = max + "점";
+
+					data[4][0] = "평균";
+					data[4][1] = String.format("%.1f", avg) + "점";
+
+					table = new JTable(data, title); // table = new JTable(데이터, 2차원배열, 컬럼배열)
+					scroll = new JScrollPane(table);
+					add(scroll);
+
+					pack();
+					setBounds(700, 400, 500, 200);
+					table.setFont((new Font("고딕", Font.PLAIN, 13)));
+					setVisible(true);
+
+					DefaultTableCellRenderer tablecell = new DefaultTableCellRenderer();
+					tablecell.setHorizontalAlignment(SwingConstants.CENTER);
+
+					table.getColumn("\\").setPreferredWidth(100); // 셀 너비 조정
+					table.getColumn("\\").setCellRenderer(tablecell);
+					; // 셀 가운데 정렬
+					table.getColumn("내용").setPreferredWidth(300);
+					table.getColumn("내용").setCellRenderer(tablecell);
+
 				}
-
-				data = new String[5][2];
-				data[0][0] = "날짜";
-				data[0][1] = date + "월 종합";
-
-				data[1][0] = "게임 수";
-				data[1][1] = selectDay.size() + "G";
-
-				data[2][0] = "총점";
-				data[2][1] = "총 " + sum + "점";
-
-				data[3][0] = "최고";
-				data[3][1] = max + "점";
-
-				data[4][0] = "평균";
-				data[4][1] = String.format("%.1f", avg) + "점";
-
-
-				
-
-				table = new JTable(data, title); // table = new JTable(데이터, 2차원배열, 컬럼배열)
-				scroll = new JScrollPane(table);
-				add(scroll);
-
-				pack();
-				setBounds(700, 400, 500, 200);
-				table.setFont((new Font("고딕", Font.PLAIN, 13)));
-				setVisible(true);
-
-				DefaultTableCellRenderer tablecell = new DefaultTableCellRenderer();
-				tablecell.setHorizontalAlignment(SwingConstants.CENTER);
-
-				table.getColumn("\\").setPreferredWidth(100); // 셀 너비 조정
-				table.getColumn("\\").setCellRenderer(tablecell);
-				; // 셀 가운데 정렬
-				table.getColumn("내용").setPreferredWidth(300);
-				table.getColumn("내용").setCellRenderer(tablecell);
-
 			}
-
 		});
+	}
+	public void dialogSelectDateError() {
+		Dialog dl = new Dialog(frame, "오류", true); // 다이얼로그 오류창
+		dl.setBounds(800, 400, 170, 100);
+		dl.setLayout(new FlowLayout());
+		Label msg = new Label("날짜를 선택해주세요.", Label.CENTER);
+		Button ok = new Button("확인");
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dl.dispose();
+			}
+		});
+		dl.add(msg);
+		dl.add(ok);
+		dl.setVisible(true);
+	}
+	public boolean selectType(String s1) {
+		int index;
+		boolean type = true;
+		for (int i = 0; i < s1.length(); i++) {
+			index = s1.charAt(i);
+			if (!(index >= 48 && index <= 57 || index == 45)) {
+				type = false;
+				break;
+			} else {
+				type = true;
+			}
+		}
+
+		return type;
 	}
 }

@@ -93,6 +93,7 @@ public class SpareMain_01_01 extends JFrame {
 		pack();
 		setBounds(700, 400, 500, 200);
 		table.setFont((new Font("고딕", Font.PLAIN, 13)));
+		setTitle("나의 정보");
 		setVisible(true);
 		
 		DefaultTableCellRenderer tablecell = new DefaultTableCellRenderer();

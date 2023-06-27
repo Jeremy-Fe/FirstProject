@@ -27,13 +27,11 @@ public class SpareScoreDAO {
 			if (date != null) {
 				query += "WHERE G_DATE like '" + date + "' AND id = '" + id + "'";
 			}
-			System.out.println("SQL : " + query);
 			
 			rs = stmt.executeQuery(query);
 			rs.last(); 
 			
 			
-			System.out.println("rs.getRow() : " + rs.getRow());
 
 			if (!(rs.getRow() == 0)) {
 				dup = true;
@@ -55,14 +53,9 @@ public class SpareScoreDAO {
 			if (date != null) {
 				query += "WHERE G_DATE like '" + date + "%' AND ID = '" + id + "'";
 			}
-			System.out.println("SQL : " + query);
 
 			int res = stmt.executeUpdate(query);
-			if (res == 0) {
-				System.out.println("삭제 실패");
-			} else {
-				System.out.println("삭제 성공");
-			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,11 +67,9 @@ public class SpareScoreDAO {
 			connDB();
 
 			String query = "SELECT S_ID FROM SCORE ORDER BY S_ID DESC";
-			System.out.println("SQL : " + query);
 			
 			rs = stmt.executeQuery(query);
 			rs.next();
-			System.out.println("rs.getInt(1) : " + rs.getInt(1));
 
 			cnt = rs.getInt(1);
 			
@@ -93,7 +84,6 @@ public class SpareScoreDAO {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			System.out.println("statement create success.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

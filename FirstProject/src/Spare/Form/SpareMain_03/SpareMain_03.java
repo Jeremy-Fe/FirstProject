@@ -119,9 +119,6 @@ public class SpareMain_03 extends JFrame {
 				if (!(selectType(date)) || clubStr.equals("상주볼링장") || sort.equals("정렬기준")) {
 					dialogSelectItemError();
 				} else {
-					System.out.println(date);
-					System.out.println(clubStr);
-					System.out.println(sort);
 
 					select = new SpareMain_03DAO();
 					ArrayList<SpareMember> ranking = select.list(clubStr, date, sort);

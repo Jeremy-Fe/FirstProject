@@ -112,7 +112,6 @@ public class SpareJoinForm extends WindowAdapter{
 						pstmt.setString(4, club);
 						
 						int r = pstmt.executeUpdate();
-						System.out.println("변경된 row " + r);
 						DialogId();
 					} catch (SQLException e1){
 						System.out.println("SQL error" + e1.getMessage());

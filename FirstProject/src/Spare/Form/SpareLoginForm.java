@@ -45,8 +45,6 @@ public class SpareLoginForm extends WindowAdapter {
 		bLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(tfId.getText() + " : " + tfPwd.getText());
-				
 				String strId = tfId.getText();
 				
 				ArrayList<SpareVo> list = dao.list(strId);
@@ -56,13 +54,10 @@ public class SpareLoginForm extends WindowAdapter {
 					String id = data.getId();
 					String pwd = data.getPassword();
 					
-					System.out.println("DB ==> " + id + " : " + pwd);
 					
 					if(tfPwd.getText().equals(pwd)) {
-						System.out.println("로그인이 되었습니다!");
 						tfMsg.setText("로그인이 되었습니다.!");
 						
-						System.out.println(id);
 						new SpareMain(id);
 						f.dispose();
 					} else {

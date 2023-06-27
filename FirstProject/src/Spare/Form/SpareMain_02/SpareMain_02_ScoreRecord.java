@@ -158,7 +158,6 @@ public class SpareMain_02_ScoreRecord extends WindowAdapter {
 									pstmt.setString(4, G_SCORE[i]);
 
 									int r = pstmt.executeUpdate();
-									System.out.println("변경된 row " + r);
 								}
 								dialogSave();
 							} catch (SQLException e2) {
@@ -178,7 +177,6 @@ public class SpareMain_02_ScoreRecord extends WindowAdapter {
 								pstmt.setString(4, G_SCORE[i]);
 
 								int r = pstmt.executeUpdate();
-								System.out.println("변경된 row " + r);
 								
 							}
 							dialogSave();

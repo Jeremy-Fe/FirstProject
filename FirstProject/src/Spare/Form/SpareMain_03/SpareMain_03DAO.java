@@ -33,16 +33,13 @@ public class SpareMain_03DAO {
 						query += "AVG(G_SCORE) DESC";
 					}
 			
-			System.out.println("SQL : " + query);
 
 			rs = stmt.executeQuery(query);
 			rs.first();
-			System.out.println("rs.getRow() : " + rs.getRow());
 			
 			if (rs.getRow() == 0) {
 				System.out.println("0 row selected.....");
 			} else {
-				System.out.println(rs.getRow() + " rows selected.....");
 				rs.previous(); // 커서를 이전으로
 				while (rs.next()) { // 다음 커서에 값이 있다면 true
 					String getname = rs.getString("NAME");
@@ -50,11 +47,6 @@ public class SpareMain_03DAO {
 					String getsum = rs.getString("SUM");
 					String getmax = rs.getString("MAX");
 					String getavg = rs.getString("AVG");
-					
-//					String getSid = rs.getString("S_ID");
-//					String getGid = rs.getString("ID");
-//					Date getGdate = rs.getDate("G_DATE");
-//					String getGscore = rs.getString("G_SCORE");
 
 					SpareMember data = new SpareMember(getname, getcount, getsum, getmax, getavg);
 
@@ -74,7 +66,6 @@ public class SpareMain_03DAO {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			System.out.println("statement create success.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

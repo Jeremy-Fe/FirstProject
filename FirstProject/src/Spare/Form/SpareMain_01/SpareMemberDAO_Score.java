@@ -27,16 +27,13 @@ public class SpareMemberDAO_Score {
 			if(id != null) {
 				query += " where id=TRIM('" + id + "') ORDER BY S_ID";
 			}
-			System.out.println("SQL : " + query);
 			
 			rs = stmt.executeQuery(query);
 			rs.first(); // 커서를 맨 처음으로
-			System.out.println("rs.getRow() : " + rs.getRow());
 			
 			if(rs.getRow() == 0) {
 				System.out.println("0 row selected.....");
 			} else {
-				System.out.println(rs.getRow() + " rows selected.....");
 				rs.previous(); // 커서를 이전으로
 				while(rs.next()) { // 커서를 다음으로
 					String getSid = rs.getString("S_ID");
@@ -61,7 +58,6 @@ public class SpareMemberDAO_Score {
 		Class.forName(driver);
 		con = DriverManager.getConnection(url, user, password);
 		stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-		System.out.println("statement create success.");
 		} catch (Exception e){
 			e.printStackTrace();
 		}

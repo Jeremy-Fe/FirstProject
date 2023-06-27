@@ -20,14 +20,14 @@ import Spare.Form.SpareMain_03.SpareMain_03;
 public class SpareMain extends WindowAdapter {
 	private Frame Spare;
 	private Button myHistory, scoreRecord, rank, myDetail, dayCheck, monthCheck, logOut;
-	
+
 	SpareMain(String id) {
 		Spare = new Frame("Spare Main"); // 로그인 성공시 생성되는 메인 프레임
 		Spare.setBounds(500, 300, 1000, 600);
 		Spare.setVisible(true);
 		Spare.addWindowListener(this);
 		Spare.setLayout(null);
-		
+
 		logOut = new Button("로그아웃");
 		logOut.setBounds(900, 30, 80, 30);
 		logOut.addActionListener(new ActionListener() {
@@ -36,7 +36,7 @@ public class SpareMain extends WindowAdapter {
 				new SpareLoginForm();
 			}
 		});
-		
+
 		myHistory = new Button("나의 기록");
 		myHistory.setBounds(150, 125, 250, 100);
 		myHistory.setFont(new Font("고딕", Font.BOLD, 25));
@@ -49,22 +49,22 @@ public class SpareMain extends WindowAdapter {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							new SpareMain_01_01(id);
-						} catch(ArrayIndexOutOfBoundsException ae) {
+						} catch (ArrayIndexOutOfBoundsException ae) {
 							dialogGapScore();
 						}
 					}
 				});
-				
+
 				dayCheck = new Button("일별 조회");
 				dayCheck.setBounds(600, 250, 250, 100);
 				dayCheck.setFont(new Font("고딕", Font.BOLD, 25));
 				dayCheck.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						new SpareMain_01_02(id);
-						
+
 					}
 				});
-				
+
 				monthCheck = new Button("월별 조회");
 				monthCheck.setBounds(600, 375, 250, 100);
 				monthCheck.setFont(new Font("고딕", Font.BOLD, 25));
@@ -73,13 +73,13 @@ public class SpareMain extends WindowAdapter {
 						new SpareMain_01_03(id);
 					}
 				});
-				
+
 				Spare.add(myDetail);
 				Spare.add(dayCheck);
 				Spare.add(monthCheck);
 			}
 		});
-		
+
 		scoreRecord = new Button("점수 기록");
 		scoreRecord.setBounds(150, 250, 250, 100);
 		scoreRecord.setFont(new Font("고딕", Font.BOLD, 25));
@@ -88,8 +88,7 @@ public class SpareMain extends WindowAdapter {
 				new SpareMain_02_ScoreRecord(id);
 			}
 		});
-		
-		
+
 		rank = new Button("볼링장 내 순위");
 		rank.setBounds(150, 375, 250, 100);
 		rank.setFont(new Font("고딕", Font.BOLD, 25));
@@ -98,17 +97,19 @@ public class SpareMain extends WindowAdapter {
 				new SpareMain_03();
 			}
 		});
-		
+
 		Spare.add(logOut);
 		Spare.add(myHistory);
 		Spare.add(scoreRecord);
 		Spare.add(rank);
-		
+
 		Spare.setVisible(true);
 	}
+
 	public void windowClosing(WindowEvent e) {
 		Spare.dispose();
 	}
+
 	public void dialogGapScore() {
 		Dialog dl = new Dialog(Spare, "오류", true); // 다이얼로그 오류창
 		dl.setBounds(700, 400, 200, 100);
@@ -124,5 +125,5 @@ public class SpareMain extends WindowAdapter {
 		dl.add(ok);
 		dl.setVisible(true);
 	}
-	
+
 }

@@ -2,6 +2,7 @@ package Spare.Form.SpareMain_01;
 
 import java.awt.Button;
 import java.awt.Choice;
+import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -15,7 +16,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -91,7 +95,6 @@ public class SpareMain_01_02 extends JFrame {
 		frame.add(d);
 		frame.add(search);
 
-		frame.setVisible(true);
 
 		search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -182,10 +185,11 @@ public class SpareMain_01_02 extends JFrame {
 					; // 셀 가운데 정렬
 					table.getColumn("내용").setPreferredWidth(300);
 					table.getColumn("내용").setCellRenderer(tablecell);
-
+					
 				}
 			}
 		});
+		frame.setVisible(true);
 	}
 	public void dialogSelectDateError() {
 		Dialog dl = new Dialog(frame, "오류", true); // 다이얼로그 오류창

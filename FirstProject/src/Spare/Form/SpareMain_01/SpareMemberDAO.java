@@ -26,16 +26,13 @@ public class SpareMemberDAO {
 			if(id != null) {
 				query += " where id=TRIM('" + id + "')";
 			}
-			System.out.println("SQL : " + query);
 			
 			rs = stmt.executeQuery(query);
 			rs.last();
-			System.out.println("rs.getRow() : " + rs.getRow());
 			
 			if(rs.getRow() == 0) {
 				System.out.println("0 row selected.....");
 			} else {
-				System.out.println(rs.getRow() + " rows selected.....");
 				rs.previous();
 				while(rs.next()) {
 					String getId = rs.getString("ID");
@@ -58,7 +55,6 @@ public class SpareMemberDAO {
 		Class.forName(driver);
 		con = DriverManager.getConnection(url, user, password);
 		stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-		System.out.println("statement create success.");
 		} catch (Exception e){
 			e.printStackTrace();
 		}

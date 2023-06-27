@@ -1,4 +1,4 @@
-package Spare.Form.SpareMain_01.test;
+package Spare.Garbage;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

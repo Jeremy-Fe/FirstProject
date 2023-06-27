@@ -1,4 +1,4 @@
-package Spare.Form.SpareMain_01.test;
+package Spare.Garbage;
 
 import java.awt.Button;
 import java.awt.Choice;

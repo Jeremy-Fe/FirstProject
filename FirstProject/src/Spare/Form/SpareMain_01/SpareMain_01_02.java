@@ -173,7 +173,7 @@ public class SpareMain_01_02 extends JFrame {
 					add(scroll);
 
 					pack();
-					setBounds(700, 400, 500, 200);
+					setBounds(700, 400, 500, 300);
 					table.setFont((new Font("고딕", Font.PLAIN, 13)));
 					setVisible(true);
 

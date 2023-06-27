@@ -1,25 +1,26 @@
-package Spare.Form.SpareMain_01.test;
+package Spare.Garbage;
 
 import java.awt.Button;
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Spare.Form.SpareMain_02.SpareMain_02_ScoreRecord;
-import Spare.Form.SpareMain_03.SpareMain_03;
-
 public class UITestMain extends JFrame {
 	private JFrame Spare;
-	private Button myHistory, scoreRecord, rank, myDetail, dayCheck, monthCheck, logOut;
+	private JButton myHistory, scoreRecord, rank, myDetail, dayCheck, monthCheck, logOut;
 	
+	
+	CardLayout card;
 	JPanel SpareMain, MainPanel01, MainPanel02, MainPanel03;
 	
 	UITestMain(String id) {
@@ -35,17 +36,17 @@ public class UITestMain extends JFrame {
 //			}
 //		});
 		
-		myHistory = new Button("나의 기록");
+		myHistory = new JButton("나의 기록");
 		myHistory.setBounds(10, 105, 250, 100);
 		myHistory.setFont(new Font("고딕", Font.BOLD, 25));
 		myHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				card.show(SpareMain, "main1");
 
 			}
 		});
 		
-		scoreRecord = new Button("점수 기록");
+		scoreRecord = new JButton("점수 기록");
 		scoreRecord.setBounds(10, 230, 250, 100);
 		scoreRecord.setFont(new Font("고딕", Font.BOLD, 25));
 		scoreRecord.addActionListener(new ActionListener() {
@@ -55,7 +56,7 @@ public class UITestMain extends JFrame {
 		});
 		
 		
-		rank = new Button("볼링장 내 순위");
+		rank = new JButton("볼링장 내 순위");
 		rank.setBounds(10, 355, 250, 100);
 		rank.setFont(new Font("고딕", Font.BOLD, 25));
 		rank.addActionListener(new ActionListener() {
@@ -66,14 +67,23 @@ public class UITestMain extends JFrame {
 		
 //		Spare.add(logOut);
 		
-		SpareMain = new JPanel();
-		SpareMain.add(myHistory);
-		SpareMain.add(scoreRecord);
-		SpareMain.add(rank);
+		card = new CardLayout();
 		
+		SpareMain = new JPanel(card);
+		SpareMain.add(new UITest01(id), "main1");
+//		SpareMain.add(scoreRecord);
+//		SpareMain.add(rank);
+		this.add(SpareMain, "Center");
 		
+		JPanel p = new JPanel(new GridLayout(3,1));
 		
-		add("West", SpareMain);
+		p.add(myHistory);
+		p.add(scoreRecord);
+		p.add(rank);
+		
+		add("West", p);
+		
+		p.setBackground(Color.DARK_GRAY);
 		
 		setBounds(500, 300, 1000, 600);
 		setVisible(true);

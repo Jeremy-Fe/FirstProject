@@ -1,9 +1,9 @@
-package Spare.Form.SpareMain_01.test;
+package Spare.Garbage;
 
 import java.awt.Font;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -13,7 +13,7 @@ import Spare.Form.SpareMain_01.SpareMember;
 import Spare.Form.SpareMain_01.SpareMemberDAO;
 import Spare.Form.SpareMain_01.SpareMemberDAO_Score;
 
-public class UITest01 extends JFrame {
+public class UITest01 extends JPanel {
 	JTable table;
 	JScrollPane scroll;
 	String[][] data; // 2차원 배열을 생성
@@ -89,7 +89,7 @@ public class UITest01 extends JFrame {
 		add(scroll);
 
 		table.setFont((new Font("고딕", Font.PLAIN, 13)));
-		setVisible(true);
+//		setVisible(true);
 
 		DefaultTableCellRenderer tablecell = new DefaultTableCellRenderer();
 		tablecell.setHorizontalAlignment(SwingConstants.CENTER);

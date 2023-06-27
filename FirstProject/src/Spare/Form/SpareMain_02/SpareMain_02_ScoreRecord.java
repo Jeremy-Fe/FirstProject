@@ -35,7 +35,7 @@ public class SpareMain_02_ScoreRecord extends WindowAdapter {
 
 	public SpareMain_02_ScoreRecord(String id) {
 		scoreRecord = new Frame("Spare Score Record");
-		scoreRecord.setBounds(1000, 270, 500, 600);
+		scoreRecord.setBounds(800, 270, 500, 600);
 		scoreRecord.setLayout(null);
 		scoreRecord.addWindowListener(this);
 

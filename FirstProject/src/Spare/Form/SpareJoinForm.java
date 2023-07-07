@@ -38,8 +38,8 @@ public class SpareJoinForm extends WindowAdapter{
 		tfId.setBounds(160, 60, 190, 40);
 		
 		
-		Label lpwdCheck1 = new Label("*비밀번호는 영문,");
-		Label lpwdCheck2 = new Label(" 숫자, 특수문자로 구성");
+		Label lpwdCheck1 = new Label("*비밀번호 한글,");
+		Label lpwdCheck2 = new Label("     공백 불가*");
 		lpwdCheck1.setBounds(360, 130, 100, 20);
 		lpwdCheck2.setBounds(360, 140, 120, 40);
 		

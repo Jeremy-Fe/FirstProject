@@ -70,7 +70,7 @@ public class SpareMain_03 extends JFrame {
 		m.setBounds(80, 210, 200, 50);
 
 		club = new Choice(); // 상주 볼링장
-		club.add("상주볼링장");
+		club.add("볼링장");
 		club.addItem("위너스볼링장");
 		club.addItem("크로바볼링장");
 		club.addItem("하이미디어볼링장");

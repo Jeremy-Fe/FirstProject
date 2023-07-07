@@ -138,7 +138,7 @@ public class SpareMain_02_ScoreRecord extends WindowAdapter {
 					dialogInputTypeError();
 				} else if (inputScoreError()) { // 점수입력칸에 0 ~ 300 사이 숫자가 아닐 때
 					dialogInputScoreError();
-				} else if (scoreNullCheck()){ // 점수 사이에 공백이 있을 때
+				} else if (scoreNullCheck()){ // 점수칸 사이에 공백이 있을 때
 					dialogScoreNullError();
 				} else {
 					if (ssd.duplication(selectDate, id)) { // 선택한 날짜에 이미 데이터가 있을 때
@@ -320,7 +320,7 @@ public class SpareMain_02_ScoreRecord extends WindowAdapter {
 		Dialog dl = new Dialog(scoreRecord, "점수 중복", true); // 다이얼로그 오류창
 		dl.setBounds(700, 400, 400, 100);
 		dl.setLayout(new FlowLayout());
-		Label msg = new Label("선택한 날짜에 이미 점수가 기록 되어있습니다. 수정하시겠습니까?", Label.CENTER);
+		Label msg = new Label("선택한 날짜에 이미 점수가 기록되어 있습니다. 수정하시겠습니까?", Label.CENTER);
 		Button ok = new Button("예");
 		Button no = new Button("아니오");
 		ok.addActionListener(new ActionListener() {
@@ -344,7 +344,7 @@ public class SpareMain_02_ScoreRecord extends WindowAdapter {
 		Dialog dl = new Dialog(scoreRecord, "입력 오류", true); // 다이얼로그 오류창
 		dl.setBounds(700, 400, 250, 100);
 		dl.setLayout(new FlowLayout());
-		Label msg = new Label("점수 순서대로 입력하세요.", Label.CENTER);
+		Label msg = new Label("점수를 순서대로 입력하세요.", Label.CENTER);
 		Button ok = new Button("확인");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -421,7 +421,7 @@ public class SpareMain_02_ScoreRecord extends WindowAdapter {
 		Dialog dl = new Dialog(scoreRecord, "날짜 선택 오류", true); // 다이얼로그 오류창
 		dl.setBounds(700, 400, 250, 100);
 		dl.setLayout(new FlowLayout());
-		Label msg = new Label("날짜를 선택하고 저장을 눌러주세요.", Label.CENTER);
+		Label msg = new Label("           날짜를 선택해주세요.           ", Label.CENTER);
 		Button ok = new Button("확인");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

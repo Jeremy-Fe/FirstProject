@@ -114,11 +114,9 @@ public class SpareJoinForm extends WindowAdapter{
 						int r = pstmt.executeUpdate();
 						DialogId();
 					} catch (SQLException e1){
-						System.out.println("SQL error" + e1.getMessage());
 						if(e1.getMessage().contains("ORA-00001")) { // 아이디 중복 됐을때
 							DialogIdError();
 						} else if (e1.getMessage().contains("ORA-01400")) { // 공백이 존재할 때
-							System.out.println("SQL error" + e1.getMessage());
 							DialogError();
 						} else { 
 							DialogError();
@@ -183,7 +181,7 @@ public class SpareJoinForm extends WindowAdapter{
 		Dialog dl = new Dialog(join, "아이디 중복", true); // 다이얼로그 오류창
 		dl.setBounds(560, 400, 300, 100);
 		dl.setLayout(new FlowLayout());
-		Label msg = new Label("아이디가 중복됩니다. 다시 입력하세요.", Label.CENTER);
+		Label msg = new Label("    아이디가 중복됩니다. 다시 입력하세요.    ", Label.CENTER);
 		Button ok = new Button("확인");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

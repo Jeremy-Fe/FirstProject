@@ -25,7 +25,7 @@ public class SpareMain_01_02_DateDAO {
 			
 			String query = "SELECT * FROM(select S_ID, ID, G_SCORE, to_char(G_DATE, 'yyyy-mm-dd') as G_DATE from SCORE) ";
 			if(date != null) {
-				query += "WHERE G_DATE like '" + date + "%' AND id = '" + id + "'"; 
+				query += "WHERE G_DATE like '" + date + "%' AND id = '" + id + "' ORDER BY S_ID"; 
 			}
 			
 			rs = stmt.executeQuery(query);

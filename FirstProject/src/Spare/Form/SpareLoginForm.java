@@ -72,7 +72,7 @@ public class SpareLoginForm extends WindowAdapter {
 						tfMsg.setText("Password가 틀렸습니다. 다시 입력하세요.");
 					}
 				} else {
-					tfMsg.setText("ID가 틀렸습니다. 다시 입력하세요.");
+					tfMsg.setText("ID가 틀렸거나 존재하지 않습니다. 다시 입력하세요.");
 				}
 			}
 		});
